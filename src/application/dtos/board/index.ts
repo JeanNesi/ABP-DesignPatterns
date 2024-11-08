@@ -1,0 +1,1 @@
+export * from './boardCreate.dto';
