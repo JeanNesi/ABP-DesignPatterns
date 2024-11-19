@@ -2,7 +2,7 @@ import { createTransport } from 'nodemailer';
 import { env } from '../env';
 
 export const transporter = createTransport({
-  host: 'smtp.mail.us-west-2.awsapps.com',
+  host: 'sandbox.smtp.mailtrap.io',
   port: 465,
   secure: true,
   auth: {
