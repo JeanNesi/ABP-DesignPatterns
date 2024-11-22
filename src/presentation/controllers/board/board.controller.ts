@@ -1,93 +1,83 @@
-//#region IMPORTS
 import {
   Body,
   Controller,
-  // Get,
+  Delete,
+  Get,
   HttpCode,
   Inject,
-  // Param,
+  Param,
   Post,
-  // Put,
-  // Delete,
+  Put,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-
-//#endregion
-
-//#region DTOS
-import { BoardResponseDTO, CreateBoardDTO } from 'src/application/dtos/board';
-//#endregion
-
-//#region USE CASES
-import { CreateBoardUseCase } from 'src/application/use-cases/board/board-create.use-case';
-//#endregion
+import { CreateBoardDTO, ResponseBoardDTO, UpdateBoardDTO } from 'src/application/dtos/board';
+import { CreateBoardUseCase, DeleteBoardUseCase, FindAllBoardsUseCase, FindBoardByIdUseCase, UpdateBoardUseCase } from 'src/application/use-cases/board';
 
 @ApiTags('Boards')
 @Controller('boards')
 export class BoardController {
-  //#region INJECTS
   @Inject(CreateBoardUseCase)
   private readonly createBoardUseCase: CreateBoardUseCase;
 
-  // @Inject(GetAllBoardsUseCase)
-  // private readonly getAllBoardsUseCase: GetAllBoardsUseCase;
+  @Inject(FindAllBoardsUseCase)
+  private readonly findAllBoardsUseCase: FindAllBoardsUseCase;
 
-  // @Inject(GetBoardByIdUseCase)
-  // private readonly getBoardByIdUseCase: GetBoardByIdUseCase;
+  @Inject(FindBoardByIdUseCase)
+  private readonly findBoardByIdUseCase: FindBoardByIdUseCase;
 
-  // @Inject(UpdateBoardUseCase)
-  // private readonly updateBoardUseCase: UpdateBoardUseCase;
+  @Inject(UpdateBoardUseCase)
+  private readonly updateBoardUseCase: UpdateBoardUseCase;
 
-  // @Inject(DeleteBoardUseCase)
-  // private readonly deleteBoardUseCase: DeleteBoardUseCase;
-  //#endregion
+  @Inject(DeleteBoardUseCase)
+  private readonly deleteBoardUseCase: DeleteBoardUseCase;
+
 
   @Post()
   @HttpCode(201)
   @ApiResponse({
     status: 201,
-    type: BoardResponseDTO,
+    type: ResponseBoardDTO,
   })
   async create(@Body() dto: CreateBoardDTO) {
     return this.createBoardUseCase.execute(dto);
   }
 
-  // @Get()
-  // @HttpCode(200)
-  // @ApiResponse({
-  //   status: 200,
-  //   type: [BoardResponseDTO],
-  // })
-  // async findAll() {
-  //   return this.getAllBoardsUseCase.execute();
-  // }
+  @Get()
+  @HttpCode(200)
+  @ApiResponse({
+    status: 200,
+    type: [ResponseBoardDTO],
+  })
+  async findAll() {
+    return this.findAllBoardsUseCase.execute();
+  }
 
-  // @Get(':id')
-  // @HttpCode(200)
-  // @ApiResponse({
-  //   status: 200,
-  //   type: BoardResponseDTO,
-  // })
-  // async findById(@Param('id') id: string) {
-  //   return this.getBoardByIdUseCase.execute(id);
-  // }
+  @Get(':id')
+  @HttpCode(200)
+  @ApiResponse({
+    status: 200,
+    type: ResponseBoardDTO,
+  })
+  async findById(@Param('id') id: string) {
+    return this.findBoardByIdUseCase.execute(id);
+  }
 
-  // @Put(':id')
-  // @HttpCode(200)
-  // @ApiResponse({
-  //   status: 200,
-  //   type: BoardResponseDTO,
-  // })
-  // async update(@Param('id') id: string, @Body() dto: UpdateBoardDTO) {
-  //   return this.updateBoardUseCase.execute(id, dto);
-  // }
+  @Put(':id')
+  @HttpCode(200)
+  @ApiResponse({
+    status: 200,
+    type: ResponseBoardDTO,
+  })
+  async update(@Param('id') id: string, @Body() dto: UpdateBoardDTO) {
+    return this.updateBoardUseCase.execute(id, dto);
+  }
 
-  // @Delete(':id')
-  // @HttpCode(204)
-  // @ApiResponse({
-  //   status: 204,
-  // })
-  // async remove(@Param('id') id: string) {
-  //   await this.deleteBoardUseCase.execute(id);
-  // }
+  @Delete(':id')
+  @HttpCode(204)
+  @ApiResponse({
+    status: 204,
+  })
+  async remove(@Param('id') id: string) {
+    await this.deleteBoardUseCase.execute(id);
+  }
 }

@@ -1,11 +1,19 @@
 import { Module } from '@nestjs/common';
-import { BoardController } from '../controllers/board/board.controller';
-import { CreateBoardUseCase } from 'src/application/use-cases/board/board-create.use-case';
-import { BoardRepository } from 'src/infrastructure/database/prisma/repositories/board.repository';
+import { CreateBoardUseCase, DeleteBoardUseCase, FindAllBoardsUseCase, FindBoardByIdUseCase, UpdateBoardUseCase } from 'src/application/use-cases/board';
 import { Prisma } from 'src/infrastructure/database/prisma';
+import { BoardRepository } from 'src/infrastructure/database/prisma/repositories/board.repository';
+import { BoardController } from '../controllers/board/';
 
 @Module({
   controllers: [BoardController],
-  providers: [CreateBoardUseCase, BoardRepository, Prisma],
+  providers: [
+    CreateBoardUseCase,
+    UpdateBoardUseCase,
+    FindAllBoardsUseCase,
+    DeleteBoardUseCase,
+    FindBoardByIdUseCase,
+    BoardRepository,
+    Prisma
+  ],
 })
-export class BoardModule {}
+export class BoardModule { }

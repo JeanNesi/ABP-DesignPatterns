@@ -5,14 +5,16 @@ import { RouterModule } from '@nestjs/core';
 
 //#region MODULES
 import { AccessModule } from './access.module';
-import { RegisterModule } from './register.module';
+import { BoardModule } from './board.module';
 import { GlobalModule } from './global.module';
+import { RegisterModule } from './register.module';
 //#endregion
 
 @Module({
   imports: [
     GlobalModule,
     AccessModule,
+    BoardModule,
     RouterModule.register([
       {
         path: 'access',
@@ -29,4 +31,4 @@ import { GlobalModule } from './global.module';
     ]),
   ],
 })
-export class AppModule {}
+export class AppModule { }

@@ -4,7 +4,7 @@ import { Prisma } from '..';
 
 @Injectable()
 export class BoardRepository {
-  constructor(private readonly prisma: Prisma) {}
+  constructor(private readonly prisma: Prisma) { }
 
   async create(data: Partial<BoardEntity>): Promise<BoardEntity> {
     return this.prisma.board.create({

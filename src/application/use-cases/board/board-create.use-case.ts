@@ -1,7 +1,6 @@
 //#region IMPORTS
-import { Injectable } from '@nestjs/common';
-import { Inject } from '@nestjs/common';
-import { BoardResponseDTO, CreateBoardDTO } from 'src/application/dtos/board';
+import { Inject, Injectable } from '@nestjs/common';
+import { CreateBoardDTO, ResponseBoardDTO } from 'src/application/dtos/board';
 import { BoardRepository } from 'src/infrastructure/database/prisma/repositories/board.repository';
 //#endregion
 
@@ -12,7 +11,7 @@ export class CreateBoardUseCase {
   private readonly boardRepository: BoardRepository;
   //#endregion
 
-  async execute(dto: CreateBoardDTO): Promise<BoardResponseDTO> {
+  async execute(dto: CreateBoardDTO): Promise<ResponseBoardDTO> {
     return this.boardRepository.create(dto).then((board) => {
       return {
         id: board.id,
