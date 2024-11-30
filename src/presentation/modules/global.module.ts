@@ -1,5 +1,5 @@
 import { Global, Module } from '@nestjs/common';
-import { ErrorCollector } from 'src/utilities/error';
+import { ErrorCollector } from '../../utilities/error';
 
 @Global()
 @Module({

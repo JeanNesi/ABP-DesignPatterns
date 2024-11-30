@@ -1,5 +1,5 @@
-import { ResponseBoardTaskDTO } from "src/application/dtos/board-task";
-import { BoardTaskEntity } from "src/domain/board-task/board-task.entity";
+import { ResponseBoardTaskDTO } from "../../../../application/dtos/board-task";
+import { BoardTaskEntity } from "../../../../domain/board-task/board-task.entity";
 
 export class BoardTaskMapper {
     static toResponseBoardTaskDTO(boardTaskEntity: BoardTaskEntity): ResponseBoardTaskDTO {

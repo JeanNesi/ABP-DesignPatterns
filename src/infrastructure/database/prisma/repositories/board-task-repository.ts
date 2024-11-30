@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { BoardStatus, BoardTaskPriority } from '@prisma/client';
-import { IBoardTaskRepository } from 'src/domain/board-task/board-task-repository.interface';
-import { BoardTaskEntity } from 'src/domain/board-task/board-task.entity';
-import { BoardStatusState } from 'src/domain/board-task/states/board-status-state ';
-import { BoardTaskPriorityState } from 'src/domain/board-task/states/board-task-priority-state ';
-import { prisma } from 'src/infrastructure/database/prisma';
+import { IBoardTaskRepository } from '../../../../domain/board-task/board-task-repository.interface';
+import { BoardTaskEntity } from '../../../../domain/board-task/board-task.entity';
+import { BoardStatusState } from '../../../../domain/board-task/states/board-status-state ';
+import { BoardTaskPriorityState } from '../../../../domain/board-task/states/board-task-priority-state ';
+import { prisma } from '../../../../infrastructure/database/prisma';
 
 @Injectable()
 export class BoardTaskRepository implements IBoardTaskRepository {

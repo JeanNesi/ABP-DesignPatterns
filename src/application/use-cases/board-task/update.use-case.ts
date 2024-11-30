@@ -1,9 +1,9 @@
 //#region IMPORTS
 import { Inject, Injectable } from '@nestjs/common';
-import { ResponseBoardTaskDTO, UpdateBoardTaskDTO } from 'src/application/dtos/board-task';
-import { IBoardTaskRepository } from 'src/domain/board-task/board-task-repository.interface';
-import { BoardStatusState } from 'src/domain/board-task/states/board-status-state ';
-import { BoardTaskPriorityState } from 'src/domain/board-task/states/board-task-priority-state ';
+import { ResponseBoardTaskDTO, UpdateBoardTaskDTO } from '../../../application/dtos/board-task';
+import { IBoardTaskRepository } from '../../../domain/board-task/board-task-repository.interface';
+import { BoardStatusState } from '../../../domain/board-task/states/board-status-state ';
+import { BoardTaskPriorityState } from '../../../domain/board-task/states/board-task-priority-state ';
 import { BoardTaskMapper } from './map/board-task.mapper';
 //#endregion
 

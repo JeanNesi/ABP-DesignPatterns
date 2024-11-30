@@ -1,4 +1,5 @@
-import { cryptography } from 'src/infrastructure/security/cryptography';
+
+import { cryptography } from '../../infrastructure/security/cryptography';
 
 export class UserEntity {
   id?: string;

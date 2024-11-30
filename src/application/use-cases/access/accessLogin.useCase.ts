@@ -1,16 +1,16 @@
 // IMPORTS
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { jwt } from 'src/infrastructure/security/jwt';
-import { cryptography } from 'src/infrastructure/security/cryptography';
+import { jwt } from '../../../infrastructure/security/jwt';
+import { cryptography } from '../../../infrastructure/security/cryptography';
 //#endregion
 
 //#region DTOS
-import { AccessDTO } from 'src/application/dtos/access/access.dto';
-import { UserFindPasswordByIdOrEmailReturnDTO } from 'src/application/dtos/user';
+import { AccessDTO } from '../../../application/dtos/access/access.dto';
+import { UserFindPasswordByIdOrEmailReturnDTO } from '../../../application/dtos/user';
 //#endregion
 
 //#REGION REPOSITORIES
-import { IUserRepository } from 'src/domain/user';
+import { IUserRepository } from '../../../domain/user';
 //#endregions
 
 @Injectable()

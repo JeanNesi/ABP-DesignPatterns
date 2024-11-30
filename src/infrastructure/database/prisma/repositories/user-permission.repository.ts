@@ -1,10 +1,10 @@
-import { enums, prisma } from 'src/infrastructure/database/prisma';
+import { enums, prisma } from '../../../../infrastructure/database/prisma';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 
-import { UserPermissionEntity } from 'src/domain/userPermission/user-permission.entity';
-import { IFindOptions } from 'src/domain/generic';
-import { IUserRepository } from 'src/domain/user';
-import { IUserPermissionRepository } from 'src/domain/userPermission';
+import { UserPermissionEntity } from '../../../../domain/userPermission/user-permission.entity';
+import { IFindOptions } from '../../../../domain/generic';
+import { IUserRepository } from '../../../../domain/user';
+import { IUserPermissionRepository } from '../../../../domain/userPermission';
 
 @Injectable()
 export class UserPermissionRepository implements IUserPermissionRepository {

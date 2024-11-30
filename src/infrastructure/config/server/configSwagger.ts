@@ -1,6 +1,6 @@
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
-import metadata from 'src/metadata';
+import metadata from '../../../metadata';
 import { env } from '../env';
 
 export async function configSwagger(app: NestFastifyApplication) {

@@ -14,7 +14,7 @@ import {
   CreateBoardTaskDTO,
   ResponseBoardTaskDTO,
   UpdateBoardTaskDTO,
-} from 'src/application/dtos/board-task';
+} from '../../../application/dtos/board-task';
 import {
   CreateBoardTaskUseCase,
   DeleteBoardTaskUseCase,
@@ -25,9 +25,9 @@ import {
   UpdateBoardTaskPriorityUseCase,
   CountBoardTasksByBoardIdUseCase,
   SearchBoardTasksByTitleOrDescriptionUseCase,
-} from 'src/application/use-cases/board-task';
-import { BoardStatusState } from 'src/domain/board-task/states/board-status-state ';
-import { BoardTaskPriorityState } from 'src/domain/board-task/states/board-task-priority-state ';
+} from '../../../application/use-cases/board-task';
+import { BoardStatusState } from '../../../domain/board-task/states/board-status-state ';
+import { BoardTaskPriorityState } from '../../../domain/board-task/states/board-task-priority-state ';
 
 @ApiTags('BoardTasks')
 @Controller('boardTasks')

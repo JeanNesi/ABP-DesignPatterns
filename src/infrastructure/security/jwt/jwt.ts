@@ -2,7 +2,7 @@ import { JwtService } from '@nestjs/jwt';
 import { FastifyRequest } from 'fastify';
 import { UnauthorizedException } from '@nestjs/common';
 
-import { env } from 'src/infrastructure/config/env';
+import { env } from '../../../infrastructure/config/env';
 
 export class Jwt {
   private readonly jwtService: JwtService = new JwtService();

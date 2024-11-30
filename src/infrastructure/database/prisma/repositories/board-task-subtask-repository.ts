@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { IBoardTaskSubtaskRepository } from 'src/domain/board-task-subtask/board-task-subtask-repository.interface';
-import { BoardTaskSubtaskEntity } from 'src/domain/board-task-subtask/board-task-subtask.entity';
-import { prisma } from 'src/infrastructure/database/prisma';
+import { IBoardTaskSubtaskRepository } from '../../../../domain/board-task-subtask/board-task-subtask-repository.interface';
+import { BoardTaskSubtaskEntity } from '../../../../domain/board-task-subtask/board-task-subtask.entity';
+import { prisma } from '../../../../infrastructure/database/prisma';
 
 @Injectable()
 export class BoardTaskSubtaskRepository implements IBoardTaskSubtaskRepository {

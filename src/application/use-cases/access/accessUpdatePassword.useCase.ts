@@ -1,14 +1,14 @@
 // IMPORTS
 import { Inject, Injectable } from '@nestjs/common';
-import { jwt } from 'src/infrastructure/security/jwt';
+import { jwt } from '../../../infrastructure/security/jwt';
 //#endregion
 
 //#region REPOSITORIES
-import { IUserRepository } from 'src/domain/user';
+import { IUserRepository } from '../../../domain/user';
 //#endregion
 
 //#region DTOS
-import { AccessUpdatePasswordDTO } from 'src/application/dtos/access';
+import { AccessUpdatePasswordDTO } from '../../../application/dtos/access';
 //#endregion
 
 @Injectable()

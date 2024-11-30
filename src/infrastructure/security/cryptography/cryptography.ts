@@ -1,7 +1,7 @@
 import { compare, hashSync } from 'bcrypt';
 
 import crypto from 'crypto';
-import { env } from 'src/infrastructure/config/env';
+import { env } from '../../../infrastructure/config/env';
 
 const algorithm = 'aes-256-ctr';
 const iv = crypto.randomBytes(16);

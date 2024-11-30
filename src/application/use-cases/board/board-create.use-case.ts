@@ -1,7 +1,7 @@
 //#region IMPORTS
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateBoardDTO, ResponseBoardDTO } from 'src/application/dtos/board';
-import { IBoardRepository } from 'src/domain/board/board-repository.interface';
+import { CreateBoardDTO, ResponseBoardDTO } from '../../../application/dtos/board';
+import { IBoardRepository } from '../../../domain/board/board-repository.interface';
 
 //#endregion
 
