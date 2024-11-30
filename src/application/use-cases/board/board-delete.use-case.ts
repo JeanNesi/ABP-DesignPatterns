@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IBoardRepository } from 'src/domain/board/board-repository.interface';
+import { IBoardRepository } from '../../../domain/board/board-repository.interface';
 
 @Injectable()
 export class DeleteBoardUseCase {

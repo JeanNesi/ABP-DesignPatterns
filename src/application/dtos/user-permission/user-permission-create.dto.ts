@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsEnum } from 'class-validator';
-import { enums } from 'src/infrastructure/database/prisma';
+import { enums } from '../../../infrastructure/database/prisma';
 
 export class UserPermissionCreateDTO {
   @ApiProperty({

@@ -12,13 +12,13 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import {
   UserPermissionCreateDTO,
   UserPermissionDeleteByIdDTO,
-} from 'src/application/dtos/user-permission';
+} from '../../../application/dtos/user-permission';
 
 import {
   UserPermissionCreateUseCase,
   UserPermissionDeleteByIdUseCase,
-} from 'src/application/use-cases/user-permission';
-import { AuthGuard } from 'src/infrastructure/security/guards';
+} from '../../../application/use-cases/user-permission';
+import { AuthGuard } from '../../../infrastructure/security/guards';
 
 @ApiTags('User Permissions')
 @ApiBearerAuth()

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { IBoardRepository } from 'src/domain/board/board-repository.interface';
-import { BoardEntity } from 'src/domain/board/board.entity';
-import { prisma } from 'src/infrastructure/database/prisma';
+import { IBoardRepository } from '../../../../domain/board/board-repository.interface';
+import { BoardEntity } from '../../../../domain/board/board.entity';
+import { prisma } from '../../../../infrastructure/database/prisma';
 
 @Injectable()
 export class BoardRepository implements IBoardRepository {

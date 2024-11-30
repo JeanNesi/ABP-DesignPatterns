@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 //#endregion
 
 //#REGION REPOSITORIES
-import { UserRepository } from 'src/infrastructure/database/prisma/repositories';
+import { UserRepository } from '../../infrastructure/database/prisma/repositories';
 //#endregion
 
 //#REGION CONTROLLERS
@@ -17,7 +17,7 @@ import {
   AccessRefreshAccessTokenUseCase,
   AccessUpdatePasswordUseCase,
   AccessSendEmailForUpdatePasswordUseCase,
-} from 'src/application/use-cases/access';
+} from '../../application/use-cases/access';
 //#endregions
 
 @Module({

@@ -1,7 +1,7 @@
 import { BoardTaskSubtaskEntity } from './board-task-subtask.entity';
 
 export interface IBoardTaskSubtaskRepository {
-    create(subtask: BoardTaskSubtaskEntity): Promise<BoardTaskSubtaskEntity>;
+    create(subtask: Partial<BoardTaskSubtaskEntity>): Promise<BoardTaskSubtaskEntity>;
     update(id: string, subtask: Partial<BoardTaskSubtaskEntity>): Promise<BoardTaskSubtaskEntity | null>;
     delete(id: string): Promise<void>;
     findById(id: string): Promise<BoardTaskSubtaskEntity | null>;

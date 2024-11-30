@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { registerErrorLog } from 'src/utilities/error';
+import { registerErrorLog } from '../../../utilities/error';
 
 type envVars =
   | 'PORT'

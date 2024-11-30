@@ -10,7 +10,7 @@ import { HttpAdapterHost } from '@nestjs/core';
 import { IErrorMessage } from './expection-filter.interface';
 import { dateTime } from '../../../../utilities/date-time';
 import { Prisma } from '@prisma/client';
-import { ErrorCollector, registerErrorLog } from 'src/utilities/error';
+import { ErrorCollector, registerErrorLog } from '../../../../utilities/error';
 
 @Catch()
 export class ExceptionsFilter implements ExceptionFilter {

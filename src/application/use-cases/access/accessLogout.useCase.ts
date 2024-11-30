@@ -1,11 +1,11 @@
 // IMPORTS
 import { Inject, Injectable } from '@nestjs/common';
-import { jwt, IAuthorizationToken } from 'src/infrastructure/security/jwt';
+import { jwt, IAuthorizationToken } from '../../../infrastructure/security/jwt';
 import { FastifyRequest } from 'fastify';
 //#endregion
 
 //#REGION REPOSITORIES
-import { IUserRepository } from 'src/domain/user';
+import { IUserRepository } from '../../../domain/user';
 //#endregion
 
 @Injectable()

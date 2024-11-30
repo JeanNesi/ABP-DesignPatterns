@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 //#endregion
 
 //#REGION REPOSITORIES
-import { UserRepository } from 'src/infrastructure/database/prisma/repositories';
+import { UserRepository } from '../../infrastructure/database/prisma/repositories';
 //#endregion
 
 //#REGION CONTROLLERS
@@ -14,7 +14,7 @@ import { RegisterController } from '../controllers/register';
 import {
   RegisterSendEmailForRegistrationUseCase,
   RegisterUser,
-} from 'src/application/use-cases/register';
+} from '../../application/use-cases/register';
 //#endregions
 
 @Module({

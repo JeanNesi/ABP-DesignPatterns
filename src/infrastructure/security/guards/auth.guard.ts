@@ -5,8 +5,8 @@ import {
   Type,
 } from '@nestjs/common';
 import { IAuthorizationToken, jwt } from '../jwt';
-import { enums } from 'src/infrastructure/database/prisma';
-import { UserPermissionRepository } from 'src/infrastructure/database/prisma/repositories/user-permission.repository';
+import { enums } from '../../../infrastructure/database/prisma';
+import { UserPermissionRepository } from '../../../infrastructure/database/prisma/repositories/user-permission.repository';
 
 export function AuthGuard(
   ...permissions: enums.Permissions[]

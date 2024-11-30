@@ -1,11 +1,11 @@
 // IMPORTS
 import { Injectable } from '@nestjs/common';
-import { jwt } from 'src/infrastructure/security/jwt';
-import { mailer } from 'src/infrastructure/email/mailer';
+import { jwt } from '../../../infrastructure/security/jwt';
+import { mailer } from '../../../infrastructure/email/mailer';
 //#endregion
 
 //#region DTOS
-import { AccessSendEmailForUpdatePasswordDTO } from 'src/application/dtos/access';
+import { AccessSendEmailForUpdatePasswordDTO } from '../../../application/dtos/access';
 //#endregion
 
 @Injectable()

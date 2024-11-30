@@ -1,5 +1,5 @@
 // #region ENUMS
-import { enums } from 'src/infrastructure/database/prisma';
+import { enums } from '../../infrastructure/database/prisma';
 // #endregion
 
 // #region DOMAIN

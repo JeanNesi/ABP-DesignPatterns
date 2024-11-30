@@ -14,14 +14,14 @@ import {
   CreateBoardDTO,
   ResponseBoardDTO,
   UpdateBoardDTO,
-} from 'src/application/dtos/board';
+} from '../../../application/dtos/board';
 import {
   CreateBoardUseCase,
   DeleteBoardUseCase,
   FindAllBoardsUseCase,
   FindBoardByIdUseCase,
   UpdateBoardUseCase,
-} from 'src/application/use-cases/board';
+} from '../../../application/use-cases/board';
 
 @ApiTags('Boards')
 @Controller('boards')
