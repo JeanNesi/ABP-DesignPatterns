@@ -1,5 +1,4 @@
-import { BoardStatusState, TodoStatus } from './states/board-status-state ';
-import { BoardTaskPriorityState, LowPriority } from './states/board-task-priority-state ';
+import { BoardStatusState, BoardTaskPriorityState, LowPriority, TodoStatus } from './states/';
 
 export class BoardTaskEntity {
   id: string;

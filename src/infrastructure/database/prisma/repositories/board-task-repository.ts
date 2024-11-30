@@ -2,14 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { BoardStatus, BoardTaskPriority } from '@prisma/client';
 import { IBoardTaskRepository } from '../../../../domain/board-task/board-task-repository.interface';
 import { BoardTaskEntity } from '../../../../domain/board-task/board-task.entity';
-import { BoardStatusState } from '../../../../domain/board-task/states/board-status-state ';
-import { BoardTaskPriorityState } from '../../../../domain/board-task/states/board-task-priority-state ';
+import { BoardStatusState, BoardTaskPriorityState, DoneStatus, HighPriority, InProgressStatus, LowPriority, MediumPriority, TodoStatus } from '../../../../domain/board-task/states/';
 import { prisma } from '../../../../infrastructure/database/prisma';
 
 @Injectable()
 export class BoardTaskRepository implements IBoardTaskRepository {
 
     private mapToEntity(task: any): BoardTaskEntity {
+        const status = this.mapToStatusState(task.status);
+        const priority = this.mapToPriorityState(task.priority);
         return new BoardTaskEntity(
             task.id,
             task.boardId,
@@ -17,9 +18,31 @@ export class BoardTaskRepository implements IBoardTaskRepository {
             task.description,
             task.averageStudyTimeInMinutes,
             task.order,
-            task.priority,
-            task.status,
+            priority,
+            status,
         );
+    }
+
+    private mapToStatusState(status: BoardStatus): BoardStatusState {
+        switch (status) {
+            case 'doing':
+                return new InProgressStatus();
+            case 'done':
+                return new DoneStatus();
+            default:
+                return new TodoStatus();
+        }
+    }
+
+    private mapToPriorityState(priority: BoardTaskPriority): BoardTaskPriorityState {
+        switch (priority) {
+            case 'medium':
+                return new MediumPriority();
+            case 'high':
+                return new HighPriority();
+            default:
+                return new LowPriority();
+        }
     }
 
     async findAll(): Promise<BoardTaskEntity[]> {
@@ -40,8 +63,8 @@ export class BoardTaskRepository implements IBoardTaskRepository {
                 description: data.description,
                 averageStudyTimeInMinutes: data.averageStudyTimeInMinutes,
                 order: data.order ?? 0,
-                priority: data.priority as unknown as BoardTaskPriority,
-                status: data.status as unknown as BoardStatus,
+                priority: data.priority.getPriorityLevel() as BoardTaskPriority,
+                status: data.status.getStatus() as BoardStatus,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
@@ -57,8 +80,8 @@ export class BoardTaskRepository implements IBoardTaskRepository {
                 description: data.description,
                 averageStudyTimeInMinutes: data.averageStudyTimeInMinutes,
                 order: data.order,
-                priority: data.priority as unknown as BoardTaskPriority,
-                status: data.status as unknown as BoardStatus,
+                priority: data.priority.getPriorityLevel() as BoardTaskPriority,
+                status: data.status.getStatus() as BoardStatus,
                 updatedAt: new Date(),
             },
         });

@@ -16,18 +16,17 @@ import {
   UpdateBoardTaskDTO,
 } from '../../../application/dtos/board-task';
 import {
+  CountBoardTasksByBoardIdUseCase,
   CreateBoardTaskUseCase,
   DeleteBoardTaskUseCase,
   FindAllBoardTasksUseCase,
   FindBoardTaskByIdUseCase,
-  UpdateBoardTaskUseCase,
-  UpdateBoardTaskStatusUseCase,
-  UpdateBoardTaskPriorityUseCase,
-  CountBoardTasksByBoardIdUseCase,
   SearchBoardTasksByTitleOrDescriptionUseCase,
+  UpdateBoardTaskPriorityUseCase,
+  UpdateBoardTaskStatusUseCase,
+  UpdateBoardTaskUseCase,
 } from '../../../application/use-cases/board-task';
-import { BoardStatusState } from '../../../domain/board-task/states/board-status-state ';
-import { BoardTaskPriorityState } from '../../../domain/board-task/states/board-task-priority-state ';
+import { BoardStatusState, BoardTaskPriorityState, DoneStatus, HighPriority, InProgressStatus, LowPriority, MediumPriority, TodoStatus } from '../../../domain/board-task/states/';
 
 @ApiTags('BoardTasks')
 @Controller('boardTasks')
@@ -110,8 +109,19 @@ export class BoardTaskController {
     type: ResponseBoardTaskDTO,
   })
   @ApiBearerAuth()
-  async updateStatus(@Param('id') id: string, @Body('status') status: BoardStatusState) {
-    return this.updateBoardTaskStatusUseCase.execute(id, status);
+  async updateStatus(@Param('id') id: string, @Body('status') status: string) {
+    let statusState: BoardStatusState;
+    switch (status) {
+      case 'doing':
+        statusState = new InProgressStatus();
+        break;
+      case 'done':
+        statusState = new DoneStatus();
+        break;
+      default:
+        statusState = new TodoStatus();
+    }
+    return this.updateBoardTaskStatusUseCase.execute(id, statusState);
   }
 
   @Put(':id/priority')
@@ -121,8 +131,19 @@ export class BoardTaskController {
     type: ResponseBoardTaskDTO,
   })
   @ApiBearerAuth()
-  async updatePriority(@Param('id') id: string, @Body('priority') priority: BoardTaskPriorityState) {
-    return this.updateBoardTaskPriorityUseCase.execute(id, priority);
+  async updatePriority(@Param('id') id: string, @Body('priority') priority: string) {
+    let priorityState: BoardTaskPriorityState;
+    switch (priority) {
+      case 'medium':
+        priorityState = new MediumPriority();
+        break;
+      case 'high':
+        priorityState = new HighPriority();
+        break;
+      default:
+        priorityState = new LowPriority();
+    }
+    return this.updateBoardTaskPriorityUseCase.execute(id, priorityState);
   }
 
   @Delete(':id')
