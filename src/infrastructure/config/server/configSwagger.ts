@@ -20,8 +20,10 @@ export async function configSwagger(app: NestFastifyApplication) {
   await SwaggerModule.loadPluginMetadata(metadata);
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document, {
-    jsonDocumentUrl: 'api/json-spec',
-    yamlDocumentUrl: 'api/yaml-spec',
-    customSiteTitle: 'API DOCS',
+    customCss: `
+    .swagger-ui .topbar { display: none; }
+    .swagger-ui .info { margin: 20px; }
+  `,
+  customfavIcon: 'data:image/png;base64,<base64_encoded_favicon>',
   });
 }
