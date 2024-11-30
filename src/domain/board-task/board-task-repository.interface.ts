@@ -3,7 +3,7 @@ import { BoardStatusState } from './states/board-status-state ';
 import { BoardTaskPriorityState } from './states/board-task-priority-state ';
 
 export interface IBoardTaskRepository {
-    create(task: BoardTaskEntity): Promise<BoardTaskEntity>;
+    create(task: Partial<BoardTaskEntity>): Promise<BoardTaskEntity>;
     update(id: string, task: Partial<BoardTaskEntity>): Promise<BoardTaskEntity | null>;
     delete(id: string): Promise<void>;
     findById(id: string): Promise<BoardTaskEntity | null>;

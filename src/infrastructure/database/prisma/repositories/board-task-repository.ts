@@ -78,7 +78,7 @@ export class BoardTaskRepository implements IBoardTaskRepository {
         const updatedTask = await prisma.boardTask.update({
             where: { id },
             data: {
-                status: status as unknown as BoardStatus,
+                status: status.getStatus() as BoardStatus,
                 updatedAt: new Date(),
             },
         });
@@ -89,7 +89,7 @@ export class BoardTaskRepository implements IBoardTaskRepository {
         const updatedTask = await prisma.boardTask.update({
             where: { id },
             data: {
-                priority: priority as unknown as BoardTaskPriority,
+                priority: priority.getPriorityLevel() as BoardTaskPriority,
                 updatedAt: new Date(),
             },
         });

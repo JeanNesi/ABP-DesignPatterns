@@ -5,6 +5,7 @@ import { RouterModule } from '@nestjs/core';
 
 //#region MODULES
 import { AccessModule } from './access.module';
+import { BoardTaskModule } from './board-task.module';
 import { BoardModule } from './board.module';
 import { GlobalModule } from './global.module';
 import { RegisterModule } from './register.module';
@@ -15,6 +16,7 @@ import { RegisterModule } from './register.module';
     GlobalModule,
     AccessModule,
     BoardModule,
+    BoardTaskModule,
     RouterModule.register([
       {
         path: 'access',
