@@ -6,9 +6,10 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 
-import { AppModule } from 'src/presentation/modules/app.module';
-import { ExceptionsFilter } from 'src/infrastructure/http/filters/exception';
-import { TrimPipe } from 'src/infrastructure/http/pipes';
+
+import { ExceptionsFilter } from '../../http/filters/exception';
+import { TrimPipe } from '../../http/pipes';
+import { AppModule } from '../../../presentation/modules/app.module';
 
 export async function configApi() {
   const app = await NestFactory.create<NestFastifyApplication>(
