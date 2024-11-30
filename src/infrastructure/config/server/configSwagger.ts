@@ -1,5 +1,5 @@
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { env } from '../env';
 
 export async function configSwagger(app: NestFastifyApplication) {
@@ -22,8 +22,10 @@ export async function configSwagger(app: NestFastifyApplication) {
 
   const document = SwaggerModule.createDocument(app, config);
 
+  // Usar customCssUrl e customJs para fornecer os arquivos estáticos corretamente
   SwaggerModule.setup('docs', app, document, {
-    customCss: '.swagger-ui .topbar { display: none; }',
+    customCssUrl: '/public/swagger-ui.css', // Caminho para o CSS do Swagger UI
+    customJs: '/public/swagger-ui-bundle.js', // Caminho para o JS do Swagger UI
     customSiteTitle: 'API Documentation',
   });
 }
