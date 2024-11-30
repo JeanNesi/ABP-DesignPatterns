@@ -19,7 +19,5 @@ export async function configSwagger(app: NestFastifyApplication) {
 
   await SwaggerModule.loadPluginMetadata(metadata);
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('docs', app, document, {
-    customCssUrl: '/swagger-ui.css',
-  });
+  SwaggerModule.setup('docs', app, document);
 }
