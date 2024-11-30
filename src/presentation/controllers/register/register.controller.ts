@@ -4,15 +4,15 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 //#endregion
 
 //#REGION DTO
-import { RegisterSendEmailForRegistrationUserDTO } from 'src/application/dtos/register';
-import { RegisterUserDTO } from 'src/application/dtos/register/registerUser.dto';
+import { RegisterSendEmailForRegistrationUserDTO } from '../../../application/dtos/register';
+import { RegisterUserDTO } from '../../../application/dtos/register/registerUser.dto';
 //#endregion
 
 //#REGION USE CASES
 import {
   RegisterSendEmailForRegistrationUseCase,
   RegisterUser,
-} from 'src/application/use-cases/register';
+} from '../../../application/use-cases/register';
 //#endregions
 
 @ApiTags('Register')

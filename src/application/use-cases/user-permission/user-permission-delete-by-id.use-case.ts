@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { UserPermissionDeleteByIdDTO } from 'src/application/dtos/user-permission';
-import { IUserPermissionRepository } from 'src/domain/userPermission';
+import { UserPermissionDeleteByIdDTO } from '../../../application/dtos/user-permission';
+import { IUserPermissionRepository } from '../../../domain/userPermission';
 
 @Injectable()
 export class UserPermissionDeleteByIdUseCase {

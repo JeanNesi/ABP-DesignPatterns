@@ -1,7 +1,7 @@
 //#region IMPORTS
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateBoardTaskSubTaskDTO, ResponseBoardTaskSubTaskDTO } from 'src/application/dtos/board-task-subtask';
-import { IBoardTaskSubtaskRepository } from 'src/domain/board-task-subtask/board-task-subtask-repository.interface';
+import { CreateBoardTaskSubTaskDTO, ResponseBoardTaskSubTaskDTO } from '../../../application/dtos/board-task-subtask';
+import { IBoardTaskSubtaskRepository } from '../../../domain/board-task-subtask/board-task-subtask-repository.interface';
 import { BoardTaskSubtaskMapper } from './map/board-task-subtask.mapper';
 //#endregion
 

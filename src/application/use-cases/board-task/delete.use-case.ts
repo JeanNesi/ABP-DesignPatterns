@@ -1,6 +1,6 @@
 //#region IMPORTS
 import { Inject, Injectable } from '@nestjs/common';
-import { IBoardTaskRepository } from 'src/domain/board-task/board-task-repository.interface';
+import { IBoardTaskRepository } from '../../../domain/board-task/board-task-repository.interface';
 //#endregion
 
 @Injectable()

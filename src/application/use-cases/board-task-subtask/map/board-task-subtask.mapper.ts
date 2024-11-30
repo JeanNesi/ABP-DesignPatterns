@@ -1,5 +1,5 @@
-import { ResponseBoardTaskSubTaskDTO } from "src/application/dtos/board-task-subtask";
-import { BoardTaskSubtaskEntity } from "src/domain/board-task-subtask/board-task-subtask.entity";
+import { ResponseBoardTaskSubTaskDTO } from "../../../../application/dtos/board-task-subtask";
+import { BoardTaskSubtaskEntity } from "../../../../domain/board-task-subtask/board-task-subtask.entity";
 
 export class BoardTaskSubtaskMapper {
     static toResponseBoardTaskSubTaskDTO(

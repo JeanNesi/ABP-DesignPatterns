@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { UserFindByIdDTO } from 'src/application/dtos/user';
-import { IUserRepository } from 'src/domain/user';
+import { UserFindByIdDTO } from '../../../application/dtos/user';
+import { IUserRepository } from '../../../domain/user';
 
 @Injectable()
 export class UserFindByIdUseCase {

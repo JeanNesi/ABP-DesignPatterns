@@ -9,7 +9,8 @@ import {
   UserFindPasswordByIdOrEmailReturnDTO,
   UserFindRefreshTokenByIdReturnDTO,
   UserUpdateDTO,
-} from 'src/application/dtos/user';
+} from '../../application/dtos/user';
+
 //#endregion
 
 //#region INTERFACES

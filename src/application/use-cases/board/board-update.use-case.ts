@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ResponseBoardDTO, UpdateBoardDTO } from 'src/application/dtos/board';
-import { IBoardRepository } from 'src/domain/board/board-repository.interface';
+import { ResponseBoardDTO, UpdateBoardDTO } from '../../../application/dtos/board';
+import { IBoardRepository } from '../../../domain/board/board-repository.interface';
 
 @Injectable()
 export class UpdateBoardUseCase {

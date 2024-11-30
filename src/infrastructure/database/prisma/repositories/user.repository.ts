@@ -6,8 +6,8 @@ import {
   Inject,
 } from '@nestjs/common';
 
-import { prisma } from 'src/infrastructure/database/prisma';
-import { ErrorCollector } from 'src/utilities/error';
+import { prisma } from '../../../../infrastructure/database/prisma';
+import { ErrorCollector } from '../../../../utilities/error';
 //#endregion
 
 //#region DTOS
@@ -21,7 +21,7 @@ import {
   UserUpdateDTO,
   UserFindPasswordByIdOrEmailDTO,
   UserFindPasswordByIdOrEmailReturnDTO,
-} from 'src/application/dtos/user';
+} from '../../../../application/dtos/user';
 
 //#endregion
 
@@ -31,13 +31,13 @@ import {
   IUpdatePassword,
   IUpdateRefreshToken,
   IUserRepository,
-} from 'src/domain/user';
+} from '../../../../domain/user';
 
 import {
   IFindOptions,
   ITakeAndPage,
   IFindManyReturn,
-} from 'src/domain/generic';
+} from '../../../../domain/generic';
 //#endregion
 
 @Injectable()

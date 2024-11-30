@@ -18,7 +18,7 @@ import {
   AccessReturnDTO,
   AccessUpdatePasswordDTO,
   AccessSendEmailForUpdatePasswordDTO,
-} from 'src/application/dtos/access';
+} from '../../../application/dtos/access';
 //#endregion
 
 //#region USE CASES
@@ -28,7 +28,7 @@ import {
   AccessRefreshAccessTokenUseCase,
   AccessUpdatePasswordUseCase,
   AccessSendEmailForUpdatePasswordUseCase,
-} from 'src/application/use-cases/access';
+} from '../../../application/use-cases/access';
 //#endregion
 
 @ApiTags('Access')
