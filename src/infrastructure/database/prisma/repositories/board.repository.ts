@@ -1,38 +1,63 @@
 import { Injectable } from '@nestjs/common';
+import { IBoardRepository } from 'src/domain/board/board-repository.interface';
 import { BoardEntity } from 'src/domain/board/board.entity';
-import { Prisma } from '..';
+import { prisma } from 'src/infrastructure/database/prisma';
 
 @Injectable()
-export class BoardRepository {
-  constructor(private readonly prisma: Prisma) { }
+export class BoardRepository implements IBoardRepository {
+
+  private mapToEntity(board: any): BoardEntity {
+    return new BoardEntity(
+      board.id,
+      board.title,
+      board.userId,
+      board.dueDate,
+      board.studyTimeInMinutes,
+      board.description
+    );
+  }
+
+  async findAll(): Promise<BoardEntity[]> {
+    const boards = await prisma.board.findMany();
+    return boards.map(this.mapToEntity);
+  }
+
+  async findById(id: string): Promise<BoardEntity | null> {
+    const board = await prisma.board.findUnique({ where: { id } });
+    return board ? this.mapToEntity(board) : null;
+  }
 
   async create(data: Partial<BoardEntity>): Promise<BoardEntity> {
-    return this.prisma.board.create({
+    console.log(data);
+    const newBoard = await prisma.board.create({
       data: {
-        dueDate: data.dueDate,
         title: data.title,
+        userId: data.userId,
+        dueDate: data.dueDate,
         studyTimeInMinutes: data.studyTimeInMinutes,
         description: data.description,
-        userId: data.userId,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
     });
-  }
-
-  async findAll(): Promise<BoardEntity[]> {
-    return this.prisma.board.findMany();
-  }
-
-  async findById(id: string): Promise<BoardEntity | null> {
-    return this.prisma.board.findUnique({ where: { id } });
+    return this.mapToEntity(newBoard);
   }
 
   async update(id: string, data: Partial<BoardEntity>): Promise<BoardEntity> {
-    return this.prisma.board.update({ where: { id }, data });
+    const updatedBoard = await prisma.board.update({
+      where: { id },
+      data: {
+        title: data.title,
+        description: data.description,
+        dueDate: data.dueDate,
+        studyTimeInMinutes: data.studyTimeInMinutes,
+        updatedAt: new Date(),
+      },
+    });
+    return this.mapToEntity(updatedBoard);
   }
 
   async delete(id: string): Promise<void> {
-    await this.prisma.board.delete({ where: { id } });
+    await prisma.board.delete({ where: { id } });
   }
 }

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ResponseBoardDTO } from 'src/application/dtos/board';
-import { BoardRepository } from 'src/infrastructure/database/prisma/repositories/board.repository';
+import { IBoardRepository } from 'src/domain/board/board-repository.interface';
 
 //#region IMPORTS
 //#endregion
@@ -8,8 +8,8 @@ import { BoardRepository } from 'src/infrastructure/database/prisma/repositories
 @Injectable()
 export class FindAllBoardsUseCase {
     //#region INJECTS
-    @Inject(BoardRepository)
-    private readonly boardRepository: BoardRepository;
+    @Inject("IBoardRepository")
+    private readonly boardRepository: IBoardRepository;
     //#endregion
 
     async execute(): Promise<ResponseBoardDTO[]> {

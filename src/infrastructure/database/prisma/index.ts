@@ -8,6 +8,5 @@ export class Prisma extends PrismaClient implements OnModuleInit {
   }
 }
 
-export { Prisma as IPrisma } from '@prisma/client';
-export { $Enums as enums } from '@prisma/client';
-export const prisma = new Prisma();
+export { $Enums as enums, Prisma as IPrisma } from '@prisma/client';
+export const prisma = new Prisma(); //{ log: ['query', 'info', 'warn', 'error'] }

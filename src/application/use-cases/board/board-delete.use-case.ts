@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { BoardRepository } from 'src/infrastructure/database/prisma/repositories/board.repository';
+import { IBoardRepository } from 'src/domain/board/board-repository.interface';
 
 @Injectable()
 export class DeleteBoardUseCase {
-    @Inject(BoardRepository)
-    private readonly boardRepository: BoardRepository;
+    @Inject("IBoardRepository")
+    private readonly boardRepository: IBoardRepository;
 
     async execute(id: string): Promise<void> {
         await this.boardRepository.delete(id);

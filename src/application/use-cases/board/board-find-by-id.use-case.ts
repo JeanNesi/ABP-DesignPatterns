@@ -1,11 +1,11 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ResponseBoardDTO } from 'src/application/dtos/board';
-import { BoardRepository } from 'src/infrastructure/database/prisma/repositories/board.repository';
+import { IBoardRepository } from 'src/domain/board/board-repository.interface';
 
 @Injectable()
 export class FindBoardByIdUseCase {
-    @Inject(BoardRepository)
-    private readonly boardRepository: BoardRepository;
+    @Inject("IBoardRepository")
+    private readonly boardRepository: IBoardRepository;
 
     async execute(id: string): Promise<ResponseBoardDTO> {
         const board = await this.boardRepository.findById(id);
