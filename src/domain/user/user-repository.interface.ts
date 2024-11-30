@@ -1,14 +1,14 @@
 //#region DTOS
 import {
+  UserCreateDTO,
   UserCreateReturnDTO,
   UserDeleteByIdDTO,
   UserFindByIdDTO,
+  UserFindByIdReturnDTO,
   UserFindPasswordByIdOrEmailDTO,
   UserFindPasswordByIdOrEmailReturnDTO,
   UserFindRefreshTokenByIdReturnDTO,
-  UserFindByIdReturnDTO,
   UserUpdateDTO,
-  UserCreateDTO,
 } from 'src/application/dtos/user';
 //#endregion
 
@@ -17,7 +17,7 @@ import {
   IFindManyReturn,
   IFindOptions,
   ITakeAndPage,
-} from '../generic/genericRepository.interface';
+} from '../generic/generic-repository.interface';
 //#endregion
 
 //#region DOMAIN

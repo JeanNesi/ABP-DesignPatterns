@@ -1,4 +1,3 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsInt,
   IsISO8601,
@@ -7,7 +6,7 @@ import {
   IsString,
 } from 'class-validator';
 
-export class BoardCreateDto {
+export class CreateBoardDTO {
   @IsString({
     message: 'O título deve ser uma string.',
   })
@@ -27,9 +26,6 @@ export class BoardCreateDto {
   userId: string;
 
   @IsISO8601({}, { message: 'A data final deve possuir o formato ISO 8601.' })
-  @ApiPropertyOptional({
-    description: 'A data final deve possuir o formato ISO 8601.',
-  })
   @IsNotEmpty({ message: 'A data de entrega é obrigatória.' })
   dueDate: Date;
 

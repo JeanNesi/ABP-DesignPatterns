@@ -1,1 +1,2 @@
-export { AccessController } from './access.controler';
+export { AccessController } from './access.controller';
+

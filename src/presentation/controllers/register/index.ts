@@ -1,1 +1,2 @@
-export { RegisterController } from './register.controler';
+export { RegisterController } from './register.controller';
+
