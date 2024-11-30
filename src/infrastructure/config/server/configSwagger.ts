@@ -8,13 +8,13 @@ export async function configSwagger(app: NestFastifyApplication) {
     .setTitle(env.get('PROJECT_NAME'))
     .setDescription(env.get('PROJECT_DESCRIPTION'))
     .setVersion(env.get('PROJECT_VERSION'))
-    .addBearerAuth({
-      type: 'apiKey',
-      bearerFormat: 'JWT',
-      name: 'Authorization',
-      scheme: 'bearer',
-      in: 'header',
-    })
+    // .addBearerAuth({
+    //   type: 'apiKey',
+    //   bearerFormat: 'JWT',
+    //   name: 'Authorization',
+    //   scheme: 'bearer',
+    //   in: 'header',
+    // })
     .build();
 
   await SwaggerModule.loadPluginMetadata(metadata);
