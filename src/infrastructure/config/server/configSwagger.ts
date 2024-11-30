@@ -20,10 +20,7 @@ export async function configSwagger(app: NestFastifyApplication) {
   await SwaggerModule.loadPluginMetadata(metadata);
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document, {
-    customCss: `
-    .swagger-ui .topbar { display: none; }
-    .swagger-ui .info { margin: 20px; }
-  `,
-  customfavIcon: 'data:image/png;base64,<base64_encoded_favicon>',
+    customCssUrl: 'https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.52.5/swagger-ui.css',  // URL do CSS
+    customJs: 'https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.52.5/swagger-ui-bundle.js',  // URL do JS
   });
 }
