@@ -6,7 +6,6 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import path from 'path';
-
 import { AppModule } from '../../../presentation/modules/app.module';
 import { ExceptionsFilter } from '../../http/filters/exception';
 import { TrimPipe } from '../../http/pipes';
@@ -20,6 +19,12 @@ export async function configApi() {
     },
   );
 
+  // Register the fastify-static plugin
+  app.register(fastifyStatic, {
+    root: path.join(__dirname, '../../../public'),
+    prefix: '/public/',
+  });
+
   //#REGION EXPETIONS FILTER
   app.useGlobalFilters(new ExceptionsFilter(app.get(HttpAdapterHost)));
   //#ENDREGION
@@ -28,12 +33,6 @@ export async function configApi() {
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useGlobalPipes(new TrimPipe());
   //#ENDREGION
-
-  // Configuração para servir arquivos estáticos (como os do Swagger UI)
-  app.register(fastifyStatic, {
-    root: path.join(__dirname, 'public'), // Caminho para a pasta onde os arquivos estáticos estão
-    prefix: '/public/', // Prefixo para os URLs de acesso aos arquivos estáticos
-  });
 
   return app;
 }

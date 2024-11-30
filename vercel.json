@@ -8,12 +8,12 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "src/main.ts"
-    },
-    {
       "source": "/public/(.*)",
       "destination": "/public/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "src/main.ts"
     }
   ],
   "headers": [
