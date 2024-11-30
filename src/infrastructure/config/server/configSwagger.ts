@@ -1,13 +1,16 @@
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
-import metadata from '../../../metadata';
 import { env } from '../env';
 
 export async function configSwagger(app: NestFastifyApplication) {
+  const projectName = env.get('PROJECT_NAME') || 'Default Project Name';
+  const projectDescription = env.get('PROJECT_DESCRIPTION') || 'Default Description';
+  const projectVersion = env.get('PROJECT_VERSION') || '1.0.0';
+
   const config = new DocumentBuilder()
-    .setTitle(env.get('PROJECT_NAME'))
-    .setDescription(env.get('PROJECT_DESCRIPTION'))
-    .setVersion(env.get('PROJECT_VERSION'))
+    .setTitle(projectName)
+    .setDescription(projectDescription)
+    .setVersion(projectVersion)
     .addBearerAuth({
       type: 'apiKey',
       bearerFormat: 'JWT',
@@ -17,10 +20,10 @@ export async function configSwagger(app: NestFastifyApplication) {
     })
     .build();
 
-  await SwaggerModule.loadPluginMetadata(metadata);
   const document = SwaggerModule.createDocument(app, config);
+
   SwaggerModule.setup('docs', app, document, {
-    customCssUrl: 'https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.52.5/swagger-ui.css',  // URL do CSS
-    customJs: 'https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.52.5/swagger-ui-bundle.js',  // URL do JS
+    customCss: '.swagger-ui .topbar { display: none; }',
+    customSiteTitle: 'API Documentation',
   });
 }
