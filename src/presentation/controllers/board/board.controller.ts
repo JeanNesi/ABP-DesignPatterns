@@ -9,9 +9,19 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateBoardDTO, ResponseBoardDTO, UpdateBoardDTO } from 'src/application/dtos/board';
-import { CreateBoardUseCase, DeleteBoardUseCase, FindAllBoardsUseCase, FindBoardByIdUseCase, UpdateBoardUseCase } from 'src/application/use-cases/board';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  CreateBoardDTO,
+  ResponseBoardDTO,
+  UpdateBoardDTO,
+} from 'src/application/dtos/board';
+import {
+  CreateBoardUseCase,
+  DeleteBoardUseCase,
+  FindAllBoardsUseCase,
+  FindBoardByIdUseCase,
+  UpdateBoardUseCase,
+} from 'src/application/use-cases/board';
 
 @ApiTags('Boards')
 @Controller('boards')
@@ -31,13 +41,13 @@ export class BoardController {
   @Inject(DeleteBoardUseCase)
   private readonly deleteBoardUseCase: DeleteBoardUseCase;
 
-
   @Post()
   @HttpCode(201)
   @ApiResponse({
     status: 201,
     type: ResponseBoardDTO,
   })
+  @ApiBearerAuth()
   async create(@Body() dto: CreateBoardDTO) {
     return this.createBoardUseCase.execute(dto);
   }
@@ -48,6 +58,7 @@ export class BoardController {
     status: 200,
     type: [ResponseBoardDTO],
   })
+  @ApiBearerAuth()
   async findAll() {
     return this.findAllBoardsUseCase.execute();
   }
@@ -58,6 +69,7 @@ export class BoardController {
     status: 200,
     type: ResponseBoardDTO,
   })
+  @ApiBearerAuth()
   async findById(@Param('id') id: string) {
     return this.findBoardByIdUseCase.execute(id);
   }
@@ -68,6 +80,7 @@ export class BoardController {
     status: 200,
     type: ResponseBoardDTO,
   })
+  @ApiBearerAuth()
   async update(@Param('id') id: string, @Body() dto: UpdateBoardDTO) {
     return this.updateBoardUseCase.execute(id, dto);
   }
@@ -77,6 +90,7 @@ export class BoardController {
   @ApiResponse({
     status: 204,
   })
+  @ApiBearerAuth()
   async remove(@Param('id') id: string) {
     await this.deleteBoardUseCase.execute(id);
   }
