@@ -10,10 +10,12 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UpdateStatusDTO } from 'src/application/dtos/board-task/update-status.dto';
 import {
   CreateBoardTaskDTO,
   ResponseBoardTaskDTO,
   UpdateBoardTaskDTO,
+  UpdatePriorityDTO,
 } from '../../../application/dtos/board-task';
 import {
   CountBoardTasksByBoardIdUseCase,
@@ -108,10 +110,9 @@ export class BoardTaskController {
     status: 200,
     type: ResponseBoardTaskDTO,
   })
-  @ApiBearerAuth()
-  async updateStatus(@Param('id') id: string, @Body('status') status: string) {
+  async updateStatus(@Param('id') id: string, @Param('status') dto: UpdateStatusDTO) {
     let statusState: BoardStatusState;
-    switch (status) {
+    switch (dto.status) {
       case 'doing':
         statusState = new InProgressStatus();
         break;
@@ -131,9 +132,9 @@ export class BoardTaskController {
     type: ResponseBoardTaskDTO,
   })
   @ApiBearerAuth()
-  async updatePriority(@Param('id') id: string, @Body('priority') priority: string) {
+  async updatePriority(@Param('id') id: string, @Param('priority') dto: UpdatePriorityDTO) {
     let priorityState: BoardTaskPriorityState;
-    switch (priority) {
+    switch (dto.priority) {
       case 'medium':
         priorityState = new MediumPriority();
         break;

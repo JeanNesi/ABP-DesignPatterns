@@ -2,7 +2,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateBoardTaskDTO, ResponseBoardTaskDTO } from '../../../application/dtos/board-task';
 import { IBoardTaskRepository } from '../../../domain/board-task/board-task-repository.interface';
-import { BoardStatusState } from '../../../domain/board-task/states/board-status-state ';
+import { TodoStatus } from '../../../domain/board-task/states/';
 import { BoardTaskPriorityState } from '../../../domain/board-task/states/board-task-priority-state ';
 import { BoardTaskMapper } from './map/board-task.mapper';
 //#endregion
@@ -22,9 +22,9 @@ export class CreateBoardTaskUseCase {
             averageStudyTimeInMinutes: data.averageStudyTimeInMinutes,
             order: data.order,
             priority: data.priority as unknown as BoardTaskPriorityState,
-            status: data.status as unknown as BoardStatusState,
+            status: new TodoStatus(),
         });
 
-       return BoardTaskMapper.toResponseBoardTaskDTO(entity);
+        return BoardTaskMapper.toResponseBoardTaskDTO(entity);
     }
 }

@@ -28,7 +28,6 @@ export class BoardRepository implements IBoardRepository {
   }
 
   async create(data: Partial<BoardEntity>): Promise<BoardEntity> {
-    console.log(data);
     const newBoard = await prisma.board.create({
       data: {
         title: data.title,

@@ -47,7 +47,7 @@ export class BoardTaskRepository implements IBoardTaskRepository {
 
     async findAll(): Promise<BoardTaskEntity[]> {
         const tasks = await prisma.boardTask.findMany();
-        return tasks.map(this.mapToEntity);
+        return tasks.map(this.mapToEntity.bind(this));
     }
 
     async findById(id: string): Promise<BoardTaskEntity | null> {
@@ -56,6 +56,7 @@ export class BoardTaskRepository implements IBoardTaskRepository {
     }
 
     async create(data: Partial<BoardTaskEntity>): Promise<BoardTaskEntity> {
+        const status = data.priority.getPriorityLevel;
         const newTask = await prisma.boardTask.create({
             data: {
                 boardId: data.boardId,
@@ -63,7 +64,7 @@ export class BoardTaskRepository implements IBoardTaskRepository {
                 description: data.description,
                 averageStudyTimeInMinutes: data.averageStudyTimeInMinutes,
                 order: data.order ?? 0,
-                priority: data.priority.getPriorityLevel() as BoardTaskPriority,
+                priority: status as unknown as BoardTaskPriority,
                 status: data.status.getStatus() as BoardStatus,
                 createdAt: new Date(),
                 updatedAt: new Date(),
