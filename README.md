@@ -15,4 +15,4 @@ $ npm run dev
 ```
 
 ## UML das classes
-![bLGzRzim4DtrAmXFSeiOxQebQPeC7W8OiDkbw42R5va8FmGUwI9e-zzxf2o9ifMuNWJn-DxnthiZYplqtFcWLL7i54TazvOxyMYyzA_iTy7OHoagXjv9KySLnHNa0G6uSxBnqfekp4gRrbpD8o8WkEKeYGZmm3sbYTyOG1_4wqPgM9edQO87h9W9UWikxkuS44vyyGCXDE8qv3c-42tLlw7_LiEFd-mFfL](https://github.com/user-attachments/assets/f7e70e12-6620-4505-b9bb-2c6fa28790ee)
+![image](https://github.com/user-attachments/assets/1d42d714-6219-45a6-9665-9a84d778688f)
