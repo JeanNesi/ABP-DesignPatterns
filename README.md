@@ -22,3 +22,5 @@ $ npm run dev
 ## State
 ![image](https://github.com/user-attachments/assets/144ec33a-b497-4b64-874c-a03b20773c00)
 
+## Adapter
+![image](https://github.com/user-attachments/assets/5e20c4c5-85a4-42c5-8af8-27a799e08ba7)
