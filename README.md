@@ -14,5 +14,8 @@ $ npm run build
 $ npm run dev
 ```
 
-## UML das classes
-![image](https://github.com/user-attachments/assets/1d42d714-6219-45a6-9665-9a84d778688f)
+## UML das implementações
+
+## State
+![image](https://github.com/user-attachments/assets/144ec33a-b497-4b64-874c-a03b20773c00)
+
