@@ -16,6 +16,9 @@ $ npm run dev
 
 ## UML das implementações
 
+##Classes do sistema
+![image](https://github.com/user-attachments/assets/97d8351a-04bc-4f0c-adcb-b9f82eb90e6d)
+
 ## State
 ![image](https://github.com/user-attachments/assets/144ec33a-b497-4b64-874c-a03b20773c00)
 
