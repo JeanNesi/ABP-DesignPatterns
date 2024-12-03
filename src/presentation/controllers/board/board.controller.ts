@@ -22,9 +22,8 @@ import {
   FindBoardByIdUseCase,
   UpdateBoardUseCase,
 } from '../../../application/use-cases/board';
-import ChatAdapter from './utils/chatAdapter';
-import { ChatGptAdapter } from './utils/chatGptAdapter';
-import { GeminiAdapter } from './utils/geminiAdapter';
+import { AIService } from './utils/ai.service';
+import { CreateBoardTaskUseCase } from 'src/application/use-cases/board-task';
 
 @ApiTags('Boards')
 @Controller('boards')
@@ -44,8 +43,11 @@ export class BoardController {
   @Inject(DeleteBoardUseCase)
   private readonly deleteBoardUseCase: DeleteBoardUseCase;
 
-  // Instanciando o adaptador (GPT ou Gemini)
-  private readonly chatAdapter: ChatAdapter = new GeminiAdapter(); // Pode ser trocado por GeminiAdapter
+  @Inject(CreateBoardTaskUseCase)
+  private readonly createBoardTaskUseCase: CreateBoardTaskUseCase;
+
+  @Inject(AIService)
+  private readonly chatAdapter: AIService = new AIService();
 
   @Post()
   @HttpCode(201)
@@ -55,16 +57,24 @@ export class BoardController {
   })
   @ApiBearerAuth()
   async create(@Body() dto: CreateBoardDTO) {
-    // Gera a resposta do ChatAdapter (aqui usamos GPT como exemplo)
-    const response = await this.chatAdapter.generateResponse(
+    const response = await this.chatAdapter.createResponse(
       dto.title,
       dto.dueDate,
       dto.studyTimeInMinutes,
     );
-    console.log('Generated Response:', response);
 
-    // Criação do board (com a resposta gerada)
-    return this.createBoardUseCase.execute(dto);
+    const board = await this.createBoardUseCase.execute(dto);
+
+    const responseLength = response.length;
+    for (let i = 0; i < responseLength; i++) {
+      const task = response[i];
+      await this.createBoardTaskUseCase.execute({
+        ...task,
+        boardId: board.id,
+      });
+    }
+
+    return board;
   }
 
   @Get()
@@ -98,7 +108,7 @@ export class BoardController {
   @ApiBearerAuth()
   async update(@Param('id') id: string, @Body() dto: UpdateBoardDTO) {
     // Gera a resposta do ChatAdapter (aqui usamos GPT como exemplo)
-    const response = await this.chatAdapter.generateResponse(
+    const response = await this.chatAdapter.createResponse(
       dto.title,
       dto.dueDate,
       dto.studyTimeInMinutes,

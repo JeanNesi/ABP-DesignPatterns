@@ -1,7 +1,7 @@
-import ChatAdapter from './ChatAdapter';
-import { GeminiService } from './services/GeminiService';
+import { GeminiService } from './gemini.service';
+import { AIInterface } from './ai.interface';
 
-export class GeminiAdapter implements ChatAdapter {
+export class GeminiAdapter implements AIInterface {
   private geminiService: GeminiService;
 
   constructor() {
@@ -9,13 +9,12 @@ export class GeminiAdapter implements ChatAdapter {
   }
 
   async generateResponse(
-    title: string,
+    description: string,
     dueDate: Date,
     studyTimeInMinutes: number,
-  ): Promise<string> {
-    // Chama o serviço Gemini passando os parâmetros necessários
+  ) {
     return this.geminiService.createResponse(
-      title,
+      description,
       dueDate,
       studyTimeInMinutes,
     );
