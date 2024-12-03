@@ -22,6 +22,8 @@ import {
   FindBoardByIdUseCase,
   UpdateBoardUseCase,
 } from '../../../application/use-cases/board';
+import { AIService } from './utils/ai.service';
+import { CreateBoardTaskUseCase } from 'src/application/use-cases/board-task';
 
 @ApiTags('Boards')
 @Controller('boards')
@@ -41,6 +43,12 @@ export class BoardController {
   @Inject(DeleteBoardUseCase)
   private readonly deleteBoardUseCase: DeleteBoardUseCase;
 
+  @Inject(CreateBoardTaskUseCase)
+  private readonly createBoardTaskUseCase: CreateBoardTaskUseCase;
+
+  @Inject(AIService)
+  private readonly chatAdapter: AIService = new AIService();
+
   @Post()
   @HttpCode(201)
   @ApiResponse({
@@ -49,7 +57,24 @@ export class BoardController {
   })
   @ApiBearerAuth()
   async create(@Body() dto: CreateBoardDTO) {
-    return this.createBoardUseCase.execute(dto);
+    const response = await this.chatAdapter.createResponse(
+      dto.title,
+      dto.dueDate,
+      dto.studyTimeInMinutes,
+    );
+
+    const board = await this.createBoardUseCase.execute(dto);
+
+    const responseLength = response.length;
+    for (let i = 0; i < responseLength; i++) {
+      const task = response[i];
+      await this.createBoardTaskUseCase.execute({
+        ...task,
+        boardId: board.id,
+      });
+    }
+
+    return board;
   }
 
   @Get()
@@ -82,6 +107,14 @@ export class BoardController {
   })
   @ApiBearerAuth()
   async update(@Param('id') id: string, @Body() dto: UpdateBoardDTO) {
+    // Gera a resposta do ChatAdapter (aqui usamos GPT como exemplo)
+    const response = await this.chatAdapter.createResponse(
+      dto.title,
+      dto.dueDate,
+      dto.studyTimeInMinutes,
+    );
+    console.log('Generated Response:', response);
+
     return this.updateBoardUseCase.execute(id, dto);
   }
 

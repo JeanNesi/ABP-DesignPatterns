@@ -1,16 +1,28 @@
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
 // import metadata from '../../../metadata';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { env } from '../env';
 
 export async function configSwagger(app: NestFastifyApplication) {
+  const projectName = env.get('PROJECT_NAME') || 'Default Project Name';
+  const projectDescription =
+    env.get('PROJECT_DESCRIPTION') || 'Default Description';
+  const projectVersion = env.get('PROJECT_VERSION') || '1.0.0';
+
   const config = new DocumentBuilder()
-    .setTitle(env.get('PROJECT_NAME'))
-    .setDescription(env.get('PROJECT_DESCRIPTION'))
-    .setVersion(env.get('PROJECT_VERSION'))
+    .setTitle(projectName)
+    .setDescription(projectDescription)
+    .setVersion(projectVersion)
+    .addBearerAuth({
+      type: 'apiKey',
+      bearerFormat: 'JWT',
+      name: 'Authorization',
+      scheme: 'bearer',
+      in: 'header',
+    })
     .build();
 
-  // await SwaggerModule.loadPluginMetadata(metadata);
   const document = SwaggerModule.createDocument(app, config);
+
   SwaggerModule.setup('docs', app, document);
 }

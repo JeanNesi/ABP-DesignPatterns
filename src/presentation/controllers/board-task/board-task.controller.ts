@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -10,24 +11,34 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UpdateStatusDTO } from 'src/application/dtos/board-task/update-status.dto';
 import {
   CreateBoardTaskDTO,
   ResponseBoardTaskDTO,
   UpdateBoardTaskDTO,
+  UpdatePriorityDTO,
 } from '../../../application/dtos/board-task';
 import {
+  CountBoardTasksByBoardIdUseCase,
   CreateBoardTaskUseCase,
   DeleteBoardTaskUseCase,
   FindAllBoardTasksUseCase,
   FindBoardTaskByIdUseCase,
-  UpdateBoardTaskUseCase,
-  UpdateBoardTaskStatusUseCase,
-  UpdateBoardTaskPriorityUseCase,
-  CountBoardTasksByBoardIdUseCase,
   SearchBoardTasksByTitleOrDescriptionUseCase,
+  UpdateBoardTaskPriorityUseCase,
+  UpdateBoardTaskStatusUseCase,
+  UpdateBoardTaskUseCase,
 } from '../../../application/use-cases/board-task';
-import { BoardStatusState } from '../../../domain/board-task/states/board-status-state ';
-import { BoardTaskPriorityState } from '../../../domain/board-task/states/board-task-priority-state ';
+import {
+  BoardStatusState,
+  BoardTaskPriorityState,
+  DoneStatus,
+  HighPriority,
+  InProgressStatus,
+  LowPriority,
+  MediumPriority,
+  TodoStatus,
+} from '../../../domain/board-task/states/';
 
 @ApiTags('BoardTasks')
 @Controller('boardTasks')
@@ -103,15 +114,53 @@ export class BoardTaskController {
     return this.updateBoardTaskUseCase.execute(id, dto);
   }
 
+  private async getCurrentState(id: string): Promise<BoardStatusState> {
+    const boardTask = await this.findBoardTaskByIdUseCase.execute(id);
+    if (!boardTask) {
+      throw new Error('Board task not found');
+    }
+
+    switch (boardTask.status) {
+      case 'doing':
+        return new InProgressStatus();
+      case 'done':
+        return new DoneStatus();
+      case 'todo':
+      default:
+        return new TodoStatus();
+    }
+  }
+
   @Put(':id/status')
   @HttpCode(200)
   @ApiResponse({
     status: 200,
     type: ResponseBoardTaskDTO,
   })
-  @ApiBearerAuth()
-  async updateStatus(@Param('id') id: string, @Body('status') status: BoardStatusState) {
-    return this.updateBoardTaskStatusUseCase.execute(id, status);
+  async updateStatus(@Body() dto: UpdateStatusDTO, @Param('id') id: string) {
+    let currentState: BoardStatusState;
+
+    currentState = await this.getCurrentState(id);
+
+    try {
+      switch (dto.status) {
+        case 'doing':
+          currentState = currentState.toInProgress();
+          break;
+        case 'done':
+          currentState = currentState.toDone();
+          break;
+        case 'todo':
+          currentState = currentState.toTodo();
+          break;
+        default:
+          throw new Error('Invalid status!');
+      }
+
+      return this.updateBoardTaskStatusUseCase.execute(id, currentState);
+    } catch (error) {
+      throw new BadRequestException(error.message || 'Bad request');
+    }
   }
 
   @Put(':id/priority')
@@ -121,8 +170,22 @@ export class BoardTaskController {
     type: ResponseBoardTaskDTO,
   })
   @ApiBearerAuth()
-  async updatePriority(@Param('id') id: string, @Body('priority') priority: BoardTaskPriorityState) {
-    return this.updateBoardTaskPriorityUseCase.execute(id, priority);
+  async updatePriority(
+    @Param('id') id: string,
+    @Body() dto: UpdatePriorityDTO,
+  ) {
+    let priorityState: BoardTaskPriorityState;
+    switch (dto.priority) {
+      case 'medium':
+        priorityState = new MediumPriority();
+        break;
+      case 'high':
+        priorityState = new HighPriority();
+        break;
+      default:
+        priorityState = new LowPriority();
+    }
+    return this.updateBoardTaskPriorityUseCase.execute(id, priorityState);
   }
 
   @Delete(':id')

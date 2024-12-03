@@ -25,10 +25,11 @@
     "schema": "src/infrastructure/database/prisma/schema.prisma"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.2.0",
     "@fastify/cors": "^9.0.1",
     "@fastify/csrf-protection": "^6.4.1",
     "@fastify/helmet": "^11.1.1",
-    "@fastify/static": "^7.0.3",
+    "@fastify/static": "^7.0.4",
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/jwt": "^10.2.0",
@@ -40,6 +41,7 @@
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
     "fastify-swagger": "^5.2.0",
+    "fastify": "^4.28.1",
     "nodemailer": "^6.9.14",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
